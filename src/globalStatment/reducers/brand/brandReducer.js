@@ -1,25 +1,22 @@
-import { GET_ALL_CATEGORIES, GET_ERROR,CREATE_CATEGORY } from "../../Type"
+import { CREATE_BRAND, GET_ALL_BRANDS, GET_ERROR } from "../../Type"
 
-
-const initialState = {
-    categories:[],
+const initialState ={
+    brands:[],
     loading:true
 }
-
-export const getAllCategoriesReducer = (state=initialState,action)=>{
+const brandReducer = (state=initialState,action) => {
     switch(action.type){
-        case GET_ALL_CATEGORIES:
+        case GET_ALL_BRANDS:
             return {
               ...state,
-                categories:action.payload,
+                brands:action.payload.data,
                 loading:false
             }
-        case CREATE_CATEGORY:
+        case CREATE_BRAND:
             return{
-                categories:action.payload,
+                brands:action.payload,
                 loading:false
             }
-        
         case GET_ERROR:
             return {
               ...state,
@@ -29,3 +26,5 @@ export const getAllCategoriesReducer = (state=initialState,action)=>{
             return state
     }
 }
+
+export default brandReducer;

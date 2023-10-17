@@ -1,20 +1,15 @@
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react';
 import { Container, Row, Spinner } from 'react-bootstrap';
-import SubTiltle from '../Uitily/SubTiltle'
-import CategoryCard from './../Category/CategoryCard';
-import clothe from "../../images/clothe.png";
-import cat2 from "../../images/cat2.png";
-import labtop from "../../images/labtop.png";
-import sale from "../../images/sale.png";
-import pic from "../../images/pic.png";
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllCategoriesAction } from './../../globalStatment/actions/category/getAllCategoryAction';
+import SubTiltle from '../Uitily/SubTiltle';
+import { getAllCategories } from './../../globalStatment/actions/category/getAllCategoryAction';
+import CategoryCard from './../Category/CategoryCard';
 
 const HomeCategory = () => {
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        dispatch(getAllCategoriesAction())
+        dispatch(getAllCategories())
     },[])
     const categories = useSelector(state=>state.allCategories.categories);
     const loading = useSelector(state=> state.allCategories.loading);

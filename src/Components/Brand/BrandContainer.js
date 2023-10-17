@@ -1,32 +1,20 @@
-import React from 'react'
-import BrandCard from './BrandCard'
-import brand1 from "../../images/brand1.png";
-import brand2 from "../../images/brand2.png";
-import brand3 from "../../images/brand3.png";
-import { Container, Row } from 'react-bootstrap';
-const BrandContainer = () => {
+import React from 'react';
+import { Container, Row, Spinner } from 'react-bootstrap';
+import BrandCard from './BrandCard';
+const BrandContainer = ({brands,loading}) => {
+    
     return (
         <Container>
             <div className="admin-content-text mt-2 ">كل الماركات</div>
             <Row className='my-1 d-flex justify-content-between'>
-                <BrandCard img={brand1} />
-                <BrandCard img={brand2} />
-                <BrandCard img={brand3} />
-                <BrandCard img={brand2} />
-                <BrandCard img={brand1} />
-                <BrandCard img={brand3} />
-                <BrandCard img={brand1} />
-                <BrandCard img={brand2} />
-                <BrandCard img={brand3} />
-                <BrandCard img={brand2} />
-                <BrandCard img={brand1} />
-                <BrandCard img={brand3} />
-                <BrandCard img={brand1} />
-                <BrandCard img={brand2} />
-                <BrandCard img={brand3} />
-                <BrandCard img={brand2} />
-                <BrandCard img={brand1} />
-                <BrandCard img={brand3} />
+                {
+                    loading ? (<Spinner animation="border" variant="primary"/>):(
+                        brands.map(brand=>(
+                            <BrandCard key={brand._id} img={brand.image} /> 
+                        ))
+                    )
+                }
+                
 
             </Row>
         </Container>

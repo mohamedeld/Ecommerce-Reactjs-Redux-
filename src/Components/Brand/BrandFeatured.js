@@ -1,22 +1,32 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, Row } from 'react-bootstrap'
 import SubTiltle from '../Uitily/SubTiltle'
 import BrandCard from './BrandCard'
-import brand1 from "../../images/brand1.png";
-import brand2 from "../../images/brand2.png";
-import brand3 from "../../images/brand3.png";
+import {Spinner} from "react-bootstrap";
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllBrands } from '../../globalStatment/actions/brand/brandAction';
 
 const BrandFeatured = ({ title, btntitle }) => {
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(getAllBrands(6))
+    },[])
+    const brands = useSelector(state=> state.allBrands.brands);
+    const loading = useSelector(state=> state.allBrands.loading);
+
     return (
         <Container>
             <SubTiltle title={title} btntitle={btntitle} pathText="/allbrand" />
             <Row className='my-1 d-flex justify-content-between'>
-                <BrandCard img={brand1} />
-                <BrandCard img={brand2} />
-                <BrandCard img={brand3} />
-                <BrandCard img={brand2} />
-                <BrandCard img={brand1} />
-                <BrandCard img={brand3} />
+                {
+                    loading ? (<Spinner animation="border" variant="primary"/>):(
+                        brands.data.map(brand=>(
+                        <BrandCard key={brand._id} img={brand.image} />  
+                        ))
+                    )
+                }
+                
+                
 
             </Row>
         </Container>
